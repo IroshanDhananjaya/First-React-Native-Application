@@ -3,22 +3,23 @@ import { NativeBaseProvider,Box, Input,Stack  } from "native-base";
 
 import React from 'react'
 
-export default function LogIN({ navigation }) {
+export default function Register({ navigation }) {
     return (
       <NativeBaseProvider  style={styles.container}>
         <Box  style={styles.box}>
         
 
         <Stack space={4} w="90%" style={styles.stackContainer}>
-        <Text  style={styles.text1}> LOGIN </Text>
-              <Input variant="underlined" w="90%"  type='email' placeholder="Email" style={styles.input1}/>
-              <Input variant="underlined" w="90%" type='password' placeholder="Password" style={styles.input2}/>
+        <Text  style={styles.text1}> REGISTER </Text>
+            <Input variant="underlined" w="90%"  type='text' placeholder="User Name" style={styles.input1}/>
+            <Input variant="underlined" w="90%"  type='email' placeholder="Email" style={styles.input1}/>
+            <Input variant="underlined" w="90%" type='password' placeholder="Password" style={styles.input2}/>
 
               <TouchableOpacity style={styles.btn}>
-                  <Text style={{color:'#ffff',fontSize:20}}> Login </Text>
+                  <Text style={{color:'#ffff',fontSize:20}}> Register </Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.btn2} onPress={()=>{navigation.navigate("Register")}}>
-                  <Text  style={{color:'black',fontSize:20,fontWeight:"bold"}}> Register Here </Text>
+              <TouchableOpacity style={styles.btn2} onPress={()=>{navigation.navigate("LogIN")}}>
+                  <Text  style={{color:'black',fontSize:20,fontWeight:"bold"}}> Login Here </Text>
               </TouchableOpacity>
           </Stack>
         </Box>
