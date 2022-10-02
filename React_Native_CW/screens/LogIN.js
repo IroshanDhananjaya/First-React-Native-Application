@@ -14,7 +14,7 @@ export default function LogIN({ navigation }) {
               <Input variant="underlined" w="90%"  type='email' placeholder="Email" style={styles.input1}/>
               <Input variant="underlined" w="90%" type='password' placeholder="Password" style={styles.input2}/>
 
-              <TouchableOpacity style={styles.btn}>
+              <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate("HomePage")}}>
                   <Text style={{color:'#ffff',fontSize:20}}> Login </Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.btn2} onPress={()=>{navigation.navigate("Register")}}>
