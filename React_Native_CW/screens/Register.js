@@ -1,27 +1,60 @@
-import { View, Text, Button,StyleSheet,TouchableOpacity} from 'react-native'
+import { View, Text, Button,StyleSheet,TouchableOpacity,Alert} from 'react-native'
 import { NativeBaseProvider,Box, Input,Stack  } from "native-base";
 
-import React from 'react'
+import {React,useState} from 'react'
 
 export default function Register({ navigation }) {
+
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
+    const rejister = async () => {
+      try {
+        const response = await fetch('http://192.168.1.132:4000/user/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+              id:"1",
+              name:name,
+              password:password,
+              email:email,
+          }),
+        });
+        const json = await response.json();
+        alert(json.message)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
+    
+
     return (
       <NativeBaseProvider  style={styles.container}>
         <Box  style={styles.box}>
-        
 
         <Stack space={4} w="90%" style={styles.stackContainer}>
-        <Text  style={styles.text1}> REGISTER </Text>
-            <Input variant="underlined" w="90%"  type='text' placeholder="User Name" style={styles.input1}/>
-            <Input variant="underlined" w="90%"  type='email' placeholder="Email" style={styles.input1}/>
-            <Input variant="underlined" w="90%" type='password' placeholder="Password" style={styles.input2}/>
 
-              <TouchableOpacity style={styles.btn}>
-                  <Text style={{color:'#ffff',fontSize:20}}> Register </Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.btn2} onPress={()=>{navigation.navigate("LogIN")}}>
-                  <Text  style={{color:'black',fontSize:20,fontWeight:"bold"}}> Login Here </Text>
-              </TouchableOpacity>
-          </Stack>
+        <Text  style={styles.text1}> REGISTER </Text>
+            <Input variant="underlined" w="90%"  type='text' placeholder="User Name" style={styles.input1} onChangeText={(e) => {setName(e)}}/>
+            <Input variant="underlined" w="90%"  type='email' placeholder="Email" style={styles.input1} onChangeText={(e) => {setEmail(e)}}/>
+            <Input variant="underlined" w="90%" type='password' placeholder="Password" style={styles.input2} onChangeText={(e) => {setPassword(e)}}/>
+
+            <TouchableOpacity style={styles.btn} onPress={rejister}>
+              <Text style={{color:'#ffff',fontSize:20}}> Register </Text>
+            </TouchableOpacity>
+
+
+            <TouchableOpacity style={styles.btn2} onPress={()=>{navigation.navigate("LogIN")}}>
+              <Text  style={{color:'black',fontSize:20,fontWeight:"bold"}}> Login Here </Text>
+            </TouchableOpacity>
+
+
+        </Stack>
+
         </Box>
            
       </NativeBaseProvider >

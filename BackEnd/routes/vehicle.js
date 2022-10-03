@@ -27,17 +27,18 @@ router.get('/', (req, res) => {
 });
 
 router.post('/',(req,res)=>{
-    const vehicleNumber=req.body.vehicleNumber;
-    const brand=req.body.brand;
-    const model=req.body.model;
-    const yearOfManufacture=req.body.yearOfManufacture;
-    const Vehiclecondition=req.body.Vehiclecondition;
-    const transmission=req.body.transmission;
-    const fuelType=req.body.fuelType;
-    const engineCapacity=req.body.engineCapacity;
-    const mileage=req.body.mileage;
-    const category=req.body.category;
-    const description=req.body.description;
+
+    const vehicleNumber=req.body.dataSet.vehicleNumber;
+    const brand=req.body.dataSet.brand;
+    const model=req.body.dataSet.model;
+    const yearOfManufacture=req.body.dataSet.yearOfManufacture;
+    const Vehiclecondition=req.body.dataSet.Vehiclecondition;
+    const transmission=req.body.dataSet.transmission;
+    const fuelType=req.body.dataSet.fuelType;
+    const engineCapacity=req.body.dataSet.engineCapacity;
+    const mileage=req.body.dataSet.mileage;
+    const category=req.body.dataSet.category;
+    const description=req.body.dataSet.description;
 
 
     var query="INSERT INTO vehicle (vehicleNumber,brand,model,yearOfManufacture,Vehiclecondition,transmission,fuelType,engineCapacity,mileage,category,description)VALUES (?,?,?,?,?,?,?,?,?,?,?)";

@@ -10,7 +10,7 @@ connection.connect(function (err){
     if(err){
         console.log(err)
     }else {
-        var userTableQuery="CREATE TABLE IF NOT EXISTS user(user_id INT AUTO_INCREMENT,name VARCHAR (20),password VARCHAR(100),email VARCHAR (100),CONSTRAINT PRIMARY KEY (user_id))"
+        var userTableQuery="CREATE TABLE IF NOT EXISTS user(user_id INT AUTO_INCREMENT,name VARCHAR (255),password VARCHAR(100),email VARCHAR (100),CONSTRAINT PRIMARY KEY (user_id))"
         connection.query(userTableQuery,function (err,result){
             if(result.warningCount === 0){
                 console.log("User table created!");
@@ -38,11 +38,12 @@ router.post('/',(req,res)=>{
 
     connection.query(query,[name,password,email],(err)=>{
         if (err) {
-            res.send({ 'message': 'duplicate entry' })
+            res.send({'error' : 'Error '})
         } else {
             res.send({ 'message': 'User created!' })
         }
     })
+
 
 
 });

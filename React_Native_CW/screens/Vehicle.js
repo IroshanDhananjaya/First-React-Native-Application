@@ -1,8 +1,35 @@
 import { View, Text, Button,StyleSheet,TouchableOpacity} from 'react-native'
 import { NativeBaseProvider,Box, Input,Stack,ScrollView,HStack, TextArea, VStack, KeyboardAvoidingView } from "native-base";
+import {useState} from 'react';
 
 
 export default function Vehicle({ navigation }) {
+
+  const [vNumber, setVNumber] = useState('');
+  const [brand, setBrand] = useState('');
+  const [model, setModel] = useState('');
+  const [yearOfManufacture, setYearOfManufacture] = useState('');
+  const [condition, setCondition] = useState('');
+  const [transmission, setTransmission] = useState('');
+  const [fuelType, setFuelType] = useState('');
+  const [engineCapacity, setEngineCapacity] = useState('');
+  const [mileage, setMileage] = useState('');
+  const [category, setCategory] = useState('');
+  const [discription, setDiscription] = useState('');
+
+  VehicleData={
+    vehicleNumber:vNumber,
+    brand:brand,
+    model:model,
+    yearOfManufacture:yearOfManufacture,
+    Vehiclecondition:condition,
+    transmission:transmission,
+    fuelType:fuelType,
+    engineCapacity:engineCapacity,
+    mileage:mileage,
+    category:category,
+    description:discription
+  }
 
   return(
       <NativeBaseProvider>
@@ -10,35 +37,34 @@ export default function Vehicle({ navigation }) {
 
       
        <Box style={styles.box}>
-           
                 <Text style={styles.header}> Add New Vehicle</Text>
                 <Stack style={styles.stack} space={1} flx w="90%" justifyContent="center">
                     <HStack w="90%" space={3} justifyContent="center">
-                         <Input variant="underlined" w="180"  type='text' placeholder="Vehicle Number" />
-                        <Input variant="underlined" w="180"  type='text' placeholder="Brand" />
+                         <Input variant="underlined" w="180"  type='text' placeholder="Vehicle Number" onChangeText={(e) => {setVNumber(e)}} />
+                        <Input variant="underlined" w="180"  type='text' placeholder="Brand" onChangeText={(e) => {setBrand(e)}}/>
                     </HStack>
                     <HStack w="90%" space={3} justifyContent="center">
-                         <Input variant="underlined" w="180"  type='text' placeholder="Model" />
-                        <Input variant="underlined" w="180"  type='text' placeholder="Year Of Manufacture" />
+                         <Input variant="underlined" w="180"  type='text' placeholder="Model" onChangeText={(e) => {setModel(e)}} />
+                        <Input variant="underlined" w="180"  type='text' placeholder="Year Of Manufacture" onChangeText={(e) => {setYearOfManufacture(e)}} />
                     </HStack>
                     <HStack w="90%" space={3} justifyContent="center">
-                         <Input variant="underlined" w="180"  type='text' placeholder="Condition" />
-                        <Input variant="underlined" w="180"  type='text' placeholder="Transmission" />
+                         <Input variant="underlined" w="180"  type='text' placeholder="Condition" onChangeText={(e) => {setCondition(e)}} />
+                        <Input variant="underlined" w="180"  type='text' placeholder="Transmission" onChangeText={(e) => {setTransmission(e)}} />
                     </HStack>
                     <HStack w="90%" space={3} justifyContent="center">
-                         <Input variant="underlined" w="180"  type='text' placeholder="Fuel Type" />
-                        <Input variant="underlined" w="180"  type='text' placeholder="Engine Capacity" />
+                         <Input variant="underlined" w="180"  type='text' placeholder="Fuel Type"  onChangeText={(e) => {setFuelType(e)}} />
+                        <Input variant="underlined" w="180"  type='text' placeholder="Engine Capacity" onChangeText={(e) => {setEngineCapacity(e)}} />
                     </HStack>
                     <HStack w="90%" space={3} justifyContent="center">
-                         <Input variant="underlined" w="180"  type='text' placeholder="Mileage" />
-                        <Input variant="underlined" w="180"  type='text' placeholder="Category" />
+                         <Input variant="underlined" w="180"  type='text' placeholder="Mileage" onChangeText={(e) => {setMileage(e)}} />
+                        <Input variant="underlined" w="180"  type='text' placeholder="Category" onChangeText={(e) => {setCategory(e)}}/>
                     </HStack>
                     <HStack w="90%" space={3} justifyContent="center">
-                         <Input variant="underlined" w="370"  type='text' placeholder="Discription" />
+                         <Input variant="underlined" w="370"  type='text' placeholder="Discription" onChangeText={(e) => {setDiscription(e)}} />
                         
                     </HStack>
                  </Stack>
-                 <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate("VehicleIMG")}}>
+                 <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate("Upload Vehicle Images",{VehicleData})}}>
                   <Text  style={{color:'#ffffff',fontSize:20,fontWeight:"bold"}}> Next </Text>
               </TouchableOpacity>
      
