@@ -48,22 +48,16 @@ router.post('/',(req,res)=>{
 
 });
 
-router.put('/',(req,res)=>{
-    const id=req.body.id;
-    const name=req.body.name;
+router.put('/login',(req,res)=>{
     const password=req.body.password;
     const email=req.body.email;
 
-    var query = "UPDATE user SET name=?, password=?,email=? WHERE user_id=?";
-    connection.query(query, [name, password,email, id], (err, rows) => {
-        if (err) console.log(err);
+    var query = "SELECT * from user WHERE email=? AND password=?";
 
-        if (rows.affectedRows > 0) {
-            res.send({ 'message': 'User updated ' })
-        } else {
-            res.send({ 'message': 'User not found' })
-        }
-        // res.send(rows)
+    connection.query(query, [email,password], (err, row) => {
+        if(err) console.log(err);
+
+        res.send(row)
     })
 })
 
@@ -82,18 +76,34 @@ router.delete('/:id', (req, res) => {
         }
     })
 })
-router.get('/:id', (req, res) => {
-    const id = req.params.id
 
-    var query = "SELECT * from user WHERE user_id=?";
 
-    connection.query(query, [id], (err, row) => {
+
+router.get('/login', (req, res) => {
+    const password=req.body.password;
+    const email=req.body.email;
+
+    var query = "SELECT * from user WHERE email=? AND password=?";
+
+    connection.query(query, [email,password], (err, row) => {
         if(err) console.log(err);
 
         res.send(row)
     })
 })
 
+// router.put('/Login',(req,res)=>{
+//     const password=req.body.password;
+//     const email=req.body.email;
+//
+//     var query = "SELECT * from user WHERE email=? AND password=?";
+//
+//     connection.query(query, [email,password], (err, row) => {
+//         if(err) console.log(err);
+//
+//         res.send(row)
+//     })
+// })
 
 
 

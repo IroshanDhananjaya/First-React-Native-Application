@@ -3,21 +3,25 @@ import { NativeBaseProvider,Box, Input,Stack  } from "native-base";
 import React, { useEffect, useState } from 'react'
 
 
-export default function HomePage({ navigation }) {
+export default function HomePage({ navigation , route }) {
 
   const [posts, setPosts] = useState([]);
+  const[userId,setUserId]=useState('')
 
   useEffect(() => {
       fetch('http://192.168.1.132:4000/vehicle/')
           .then((response) => response.json())
           .then((json) => setPosts(json));
-          console.log(posts);
+
+        setUserId(route.params.userID)
+          
+         
   })
 
   return(
       <NativeBaseProvider>
        <Box style={styles.box}>
-        <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate("Vehicle")}}>
+        <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate("Vehicle",{userId})}}>
                   <Text style={{color:'#ffff',fontSize:20}}> Add New Vehicle </Text>
         </TouchableOpacity>
 

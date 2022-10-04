@@ -4,60 +4,62 @@ import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { useEffect, useState } from 'react';
 import ImagePicker from 'react-native-image-crop-picker';
 
-export default function VehicleDetails({route}) {
+export default function VehicleDetails({ navigation ,route}) {
 
     const [imgUri,setImgUri]=useState('');
     const [imgUri2,setImgUri2]=useState('');
     const [imgUri3,setImgUri3]=useState('');
     const [imgUri4,setImgUri4]=useState('');
 
-     const[dataSet,setDataSet]=useState('')
-    const saveVehicle = async () => {
-        try {
-          const response = await fetch('http://192.168.1.132:4000/vehicle/', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({dataSet}),
-          });
-          const json = await response.json();
-          alert(json.message)
-        } catch (error) {
-          console.error(error);
-        }
+     const[vDetails,setVDetails]=useState('')
 
-        console.log(dataSet)
-      }
 
-    // useEffect(() => {
-    //     setDataSet(route.params.VehicleData)
+    // const saveVehicle = async () => {
+    //     try {
+    //       const response = await fetch('http://192.168.1.132:4000/vehicle/', {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({dataSet}),
+    //       });
+    //       const json = await response.json();
+    //       alert(json.message)
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+
+    //     console.log(dataSet)
+    //   }
+
+    useEffect(() => {
+        setVDetails(route.params.vehicle)
        
-    // })
+    })
 
-    const openCamera=()=>{
-        ImagePicker.openCamera({
-            width: 300,
-            height: 400,
-            cropping: true,
-          }).then(image => {
-            console.log(image);
-            setImgUri(image.path)
-          });
-    }
+    // const openCamera=()=>{
+    //     ImagePicker.openCamera({
+    //         width: 300,
+    //         height: 400,
+    //         cropping: true,
+    //       }).then(image => {
+    //         console.log(image);
+    //         setImgUri(image.path)
+    //       });
+    // }
 
-    const openGallery=(method)=>{
-        ImagePicker.openPicker({
-            width: 300,
-            height: 400,
-            cropping: true
-          }).then(image => {
-            console.log(image);
-           // setImgUri(image.path)
-            method(image.path)
-          });
+    // const openGallery=(method)=>{
+    //     ImagePicker.openPicker({
+    //         width: 300,
+    //         height: 400,
+    //         cropping: true
+    //       }).then(image => {
+    //         console.log(image);
+    //        // setImgUri(image.path)
+    //         method(image.path)
+    //       });
         
-    }
+    // }
      return( 
         <NativeBaseProvider>
 
@@ -107,8 +109,16 @@ export default function VehicleDetails({route}) {
         <Text style={{marginBottom:10,fontWeight:'bold',color:"#5f27cd", position:"absolute", fontSize:18,top:500,left:65}} > Discription : </Text>
         <Text style={{marginBottom:10,fontWeight:'bold',color:"black", position:"absolute", fontSize:18,top:500,left:160}} > {route.params.vehicle.description} </Text> 
 
-          
+        <TouchableOpacity style={styles.Updatebtn} onPress={()=>{navigation.navigate("Vehicle Update",{vDetails})}}>
+              <Text style={{color:'#ffff',fontSize:20}}> Update </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.Deletebtn} >
+              <Text style={{color:'#ffff',fontSize:20}}> Update </Text>
+          </TouchableOpacity>
+
         </NativeBaseProvider>
+        
     )
 }
 
@@ -184,5 +194,27 @@ const styles = StyleSheet.create({
     },
     input2:{
       width:"35%",
+    },
+    Updatebtn:{
+      position:"absolute",
+      width:'40%',
+      top:590,
+      left:30,
+      padding:5,
+      backgroundColor:"green",
+      height:50,
+      alignItems:'center',
+      justifyContent:'center',
+    },
+    Deletebtn:{
+      position:"absolute",
+      width:'40%',
+      top:590,
+      left:200,
+      padding:5,
+      backgroundColor:"red",
+      height:50,
+      alignItems:'center',
+      justifyContent:'center',
     }
   })

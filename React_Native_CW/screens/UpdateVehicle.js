@@ -3,7 +3,7 @@ import { NativeBaseProvider,Box, Input,Stack,ScrollView,HStack, TextArea, VStack
 import {useState,useEffect} from 'react';
 
 
-export default function Vehicle({ navigation ,route }) {
+export default function VehicleUpdate({ navigation,route }) {
 
   const [vNumber, setVNumber] = useState('');
   const [brand, setBrand] = useState('');
@@ -15,11 +15,14 @@ export default function Vehicle({ navigation ,route }) {
   const [engineCapacity, setEngineCapacity] = useState('');
   const [mileage, setMileage] = useState('');
   const [category, setCategory] = useState('');
-  const [userId, setUserId] = useState('');
+  const [discription, setDiscription] = useState('');
+
 
   useEffect(() => {
-   setUserId(route.params.userId);
-   console.log(route);
+        setVNumber(route.params.vDetails.vehicleNumber)
+
+    console.log(route.params)
+   
 })
 
   VehicleData={
@@ -33,7 +36,7 @@ export default function Vehicle({ navigation ,route }) {
     engineCapacity:engineCapacity,
     mileage:mileage,
     category:category,
-    userId:userId.toString
+    description:discription
   }
 
   return(
@@ -42,10 +45,10 @@ export default function Vehicle({ navigation ,route }) {
 
       
        <Box style={styles.box}>
-                <Text style={styles.header}> Add New Vehicle</Text>
+                <Text style={styles.header}> Update Vehicle </Text>
                 <Stack style={styles.stack} space={1} flx w="90%" justifyContent="center">
                     <HStack w="90%" space={3} justifyContent="center">
-                         <Input variant="underlined" w="180"  type='text' placeholder="Vehicle Number" onChangeText={(e) => {setVNumber(e)}} />
+                         <Input variant="underlined" w="180"  type='text' placeholder="Vehicle Number" value={vNumber}  onChangeText={(e) => {setVNumber(e,console.log(vNumber))}} />
                         <Input variant="underlined" w="180"  type='text' placeholder="Brand" onChangeText={(e) => {setBrand(e)}}/>
                     </HStack>
                     <HStack w="90%" space={3} justifyContent="center">
@@ -64,10 +67,13 @@ export default function Vehicle({ navigation ,route }) {
                          <Input variant="underlined" w="180"  type='text' placeholder="Mileage" onChangeText={(e) => {setMileage(e)}} />
                         <Input variant="underlined" w="180"  type='text' placeholder="Category" onChangeText={(e) => {setCategory(e)}}/>
                     </HStack>
-                  
+                    <HStack w="90%" space={3} justifyContent="center">
+                         <Input variant="underlined" w="370"  type='text' placeholder="Discription" onChangeText={(e) => {setDiscription(e)}} />
+                        
+                    </HStack>
                  </Stack>
                  <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate("Upload Vehicle Images",{VehicleData})}}>
-                  <Text  style={{color:'#ffffff',fontSize:20,fontWeight:"bold"}}> Next </Text>
+                  <Text  style={{color:'#ffffff',fontSize:20,fontWeight:"bold"}}> Update </Text>
               </TouchableOpacity>
      
               <TouchableOpacity style={styles.btn2} >
@@ -125,7 +131,7 @@ const styles = StyleSheet.create({
     position:"absolute",
     width:'40%',
     padding:5,
-    backgroundColor:"blue",
+    backgroundColor:"green",
     height:50,
     alignItems:'center',
     justifyContent:'center',

@@ -9,6 +9,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomePage from './screens/HomePage';
 import Vehicle from './screens/Vehicle';
 import VehicleDetails from './screens/vehicleDetails'
+import VehicleUpdate from './screens/UpdateVehicle'
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
           <Stack.Screen name="Vehicle" component={Vehicle} />
           <Stack.Screen name="Upload Vehicle Images" component={VehicleImg} />
           <Stack.Screen name="Vehicle Details" component={VehicleDetails} />
+          <Stack.Screen name="Vehicle Update" component={VehicleUpdate} />
       </Stack.Navigator>
     </NavigationContainer>
     
