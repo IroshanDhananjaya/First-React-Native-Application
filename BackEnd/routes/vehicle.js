@@ -97,11 +97,12 @@ router.delete('/:id', (req, res) => {
     })
 })
 router.get('/:id', (req, res) => {
-    const vehicleNumber = req.params.vehicleNumber
+    const userId = req.params.id;
 
-    var query = "SELECT * from vehicle WHERE vehicleNumber=?";
 
-    connection.query(query, [vehicleNumber], (err, row) => {
+    var query = "SELECT * from vehicle WHERE userID=?";
+
+    connection.query(query, [userId], (err, row) => {
         if(err) console.log(err);
 
         res.send(row)

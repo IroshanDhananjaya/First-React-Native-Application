@@ -9,7 +9,7 @@ export default function HomePage({ navigation , route }) {
   const[userId,setUserId]=useState('')
 
   useEffect(() => {
-      fetch('http://192.168.1.132:4000/vehicle/')
+      fetch('http://192.168.1.132:4000/vehicle/'+route.params.userID)
           .then((response) => response.json())
           .then((json) => setPosts(json));
 
@@ -47,6 +47,7 @@ export default function HomePage({ navigation , route }) {
          
      
        </Box>
+       
        </NativeBaseProvider>
   )
     
