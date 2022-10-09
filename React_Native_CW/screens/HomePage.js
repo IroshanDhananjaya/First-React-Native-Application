@@ -8,15 +8,18 @@ export default function HomePage({ navigation , route }) {
   const [posts, setPosts] = useState([]);
   const[userId,setUserId]=useState('')
 
+  const {user} = route.params;
+
+
   useEffect(() => {
-      fetch('http://192.168.1.132:4000/vehicle/'+route.params.userID)
+      fetch('http://192.168.1.132:4000/vehicle/'+route.params.user)
           .then((response) => response.json())
           .then((json) => setPosts(json));
 
-        setUserId(route.params.userID)
-          
+        setUserId(route.params.user)
+          console.log("Wedoo : "+route.params.user);
          
-  })
+  },[])
 
   return(
       <NativeBaseProvider>

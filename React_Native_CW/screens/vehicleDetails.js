@@ -114,7 +114,7 @@ export default function VehicleDetails({ navigation ,route}) {
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.Deletebtn} >
-              <Text style={{color:'#ffff',fontSize:20}}> Update </Text>
+              <Text style={{color:'#ffff',fontSize:20}}> Delete </Text>
           </TouchableOpacity>
 
         </NativeBaseProvider>
@@ -130,7 +130,6 @@ const styles = StyleSheet.create({
       backgroundColor:"#ffffff",
       height:"100%",
       width:"100%",
-     
     },
     stack:{
       width:"100%",

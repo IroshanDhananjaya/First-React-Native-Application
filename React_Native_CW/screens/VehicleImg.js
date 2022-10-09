@@ -19,7 +19,14 @@ export default function Vehicle({route}) {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({dataSet}),
+            body: JSON.stringify({
+              
+              vehicleNumber:dataSet.vNumber,
+              brand:dataSet.brand,
+              model:dataSet.model,
+             
+
+              }),
           });
           const json = await response.json();
           alert(json.message)
@@ -31,9 +38,9 @@ export default function Vehicle({route}) {
       }
 
     useEffect(() => {
-        setDataSet(route.params.VehicleData)
+        setDataSet(route)
        
-    })
+    },[])
 
     const openCamera=()=>{
         ImagePicker.openCamera({
@@ -46,25 +53,39 @@ export default function Vehicle({route}) {
           });
     }
 
-    const openGallery=(method)=>{
-        ImagePicker.openPicker({
-            width: 300,
-            height: 400,
-            cropping: true
-          }).then(image => {
-            console.log(image);
-           // setImgUri(image.path)
-            method(image.path)
-          });
+    const openGallery = (setImage) => {
+      const options = {
+        storageOption: {
+          path: 'images',
+          mediaType: 'photo',
+        },
+        includeBase64: true,
+      };
+  
+      launchImageLibrary(options, response => {
+        if (response.didCancel) {
+          console.log('user cancle');
+        } else if (response.error) {
+          console.log(response.error);
+        } else if (response.customButton) {
+          console.log(response.customButton);
+        } else {
+          const source = {
+  
+            uri: response.assets[0].uri,
+          };
+          setImage(source);
         
-    }
+        }
+      });
+    };
      return( 
         <NativeBaseProvider>
 
             <Stack style={styles.stack} space={1} flx w="90%" justifyContent="center">
                  <HStack w="90%" space={3} justifyContent="center">
                     <ImageBackground
-                        source={{uri:imgUri}}
+                        source={imgUri}
                         style={{height:160,width:150,borderWidth:2,borderColor:"black"}}
                     />
                     <TouchableOpacity  style={styles.btn} title='Open Camera'   onPress={()=>{
@@ -76,7 +97,7 @@ export default function Vehicle({route}) {
 
                 <HStack w="90%" space={3} justifyContent="center">
                     <ImageBackground
-                        source={{uri:imgUri2}}
+                        source={imgUri2}
                         style={{height:160,width:150,borderWidth:2,borderColor:"black"}}
                     />
                     <TouchableOpacity  style={styles.btn} title='Open Camera'   onPress={()=>{
@@ -89,7 +110,7 @@ export default function Vehicle({route}) {
                 
                 <HStack w="90%" space={3} justifyContent="center">
                     <ImageBackground
-                        source={{uri:imgUri3}}
+                        source={imgUri3}
                         style={{height:160,width:150,borderWidth:2,borderColor:"black"}}
                     />
                     <TouchableOpacity  style={styles.btn} title='Open Camera'   onPress={()=>{
@@ -102,7 +123,7 @@ export default function Vehicle({route}) {
                 
                 <HStack w="90%" space={3} justifyContent="center">
                     <ImageBackground
-                        source={{uri:imgUri4}}
+                        source={imgUri4}
                         style={{height:160,width:150,borderWidth:2,borderColor:"black"}}
                     />
                     <TouchableOpacity  style={styles.btn} title='Open Camera'   onPress={()=>{

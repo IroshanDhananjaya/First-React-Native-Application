@@ -79,7 +79,7 @@ router.delete('/:id', (req, res) => {
 
 
 
-router.get('/login', (req, res) => {
+/*router.get('/login', (req, res) => {
     const password=req.body.password;
     const email=req.body.email;
 
@@ -88,9 +88,30 @@ router.get('/login', (req, res) => {
     connection.query(query, [email,password], (err, row) => {
         if(err) console.log(err);
 
+        if(row.length==0){
+            res.
+        }
         res.send(row)
     })
-})
+})*/
+
+router.post("/verify", (req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;
+
+    var loginVerify = "SELECT * FROM user WHERE email=? AND password=?";
+    connection.query(loginVerify, [email, password], (err, row) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (row.length === 0) {
+                res.send({ message: "Incorrect Username or Password" });
+            } else {
+                res.send({ message: "Login Successfully", user: row[0]});
+            }
+        }
+    });
+});
 
 // router.put('/Login',(req,res)=>{
 //     const password=req.body.password;

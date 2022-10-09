@@ -1,4 +1,4 @@
-import { View, Text, Button,StyleSheet,TouchableOpacity} from 'react-native'
+import { View, Text, Button,StyleSheet,TouchableOpacity, Alert} from 'react-native'
 import { NativeBaseProvider,Box, Input,Stack,ScrollView,HStack, TextArea, VStack, KeyboardAvoidingView } from "native-base";
 import {useState,useEffect} from 'react';
 
@@ -35,6 +35,32 @@ export default function VehicleUpdate({ navigation,route }) {
     console.log(route.params)
    
 },[])
+
+ 
+
+  const updateVehicle=()=>{
+    fetch('http://192.168.1.132:4000/vehicle/', {
+  method: 'PUT',
+  body: JSON.stringify({
+     vehicleNumber:vNumber,
+     brand:brand,
+     model:model,
+     yearOfManufacture:yearOfManufacture,
+     Vehiclecondition:condition,
+     transmission:transmission,
+     fuelType:fuelType,
+     engineCapacity:engineCapacity,
+     mileage:mileage,
+     category:category,
+    
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => alert(json.message));
+  }
 
   // VehicleData={
   //   vehicleNumber:vNumber,
@@ -80,7 +106,7 @@ export default function VehicleUpdate({ navigation,route }) {
                     </HStack>
     
                  </Stack>
-                 <TouchableOpacity style={styles.btn} onPress={()=>{navigation.navigate("Upload Vehicle Images",{VehicleData})}}>
+                 <TouchableOpacity style={styles.btn} onPress={updateVehicle}>
                   <Text  style={{color:'#ffffff',fontSize:20,fontWeight:"bold"}}> Update </Text>
               </TouchableOpacity>
      

@@ -33,9 +33,9 @@ export default function Vehicle({ navigation ,route }) {
     engineCapacity:engineCapacity,
     mileage:mileage,
     category:category,
-    userId:userId.toString
+    userId:userId
   }
-
+ 
   return(
       <NativeBaseProvider>
         <KeyboardAvoidingView>
@@ -71,7 +71,7 @@ export default function Vehicle({ navigation ,route }) {
               </TouchableOpacity>
      
               <TouchableOpacity style={styles.btn2} >
-                  <Text  style={{color:'#ffffff',fontSize:20,fontWeight:"bold"}}> Cancl </Text>
+                  <Text  style={{color:'#ffffff',fontSize:20,fontWeight:"bold"}}> Cancel </Text>
               </TouchableOpacity>
             </Box>
             </KeyboardAvoidingView>
